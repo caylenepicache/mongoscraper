@@ -19,12 +19,27 @@ var app = express();
 
 // Configure middleware
 
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+app.set('views', './views')
+
 // Use morgan logger for logging requests
 app.use(logger("dev"));
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
-app.use(express.static("public"));
+//app.use(express.static("public"));
+app.use('/public', express.static(__dirname + "/public"));
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/myapp");
@@ -117,6 +132,10 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
+var routes = require("./controllers/indexcontroller.js");
+
+app.use(routes);
 
 // Start the server
 app.listen(PORT, function() {
