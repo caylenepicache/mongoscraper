@@ -8,6 +8,27 @@ $.getJSON("/articles", function(data) {
 });
 
 
+function getScrape() {
+  $.get("/scrape", function(data) {
+  // For each one
+  for (var i = 0; i < data.length; i++) {
+    // Display the apropos information on the page
+    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+  }
+  location.reload();
+  //$('#exampleModal').modal('show');
+});
+};
+
+
+$("#scrapeNew").click(function (event) {
+
+  $("#articles").empty();
+  getScrape();
+});
+
+
+
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
   // Empty the notes from the note section

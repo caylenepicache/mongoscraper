@@ -46,6 +46,8 @@ mongoose.connect("mongodb://localhost/myapp");
 
 // Routes
 
+//SCRAPING HERE
+
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
@@ -79,9 +81,11 @@ app.get("/scrape", function(req, res) {
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
-    res.send("Scrape Complete");
+  //  res.render('home');
+  // window.location.reload();
   });
 });
+
 
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
@@ -113,6 +117,7 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
+
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function(req, res) {
   // Create a new note and pass the req.body to the entry
@@ -133,6 +138,7 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
+//CONTROLLER ROUTES
 var routes = require("./controllers/indexcontroller.js");
 
 app.use(routes);
