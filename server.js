@@ -157,48 +157,48 @@ app.post("/articles/:id", function(req, res) {
 
 // Deletes a note from the notes array stored in the article
 app.put("/delete/:article_id/:note_id", function(req, res) {
-  db.Article.findOneAndUpdate({_id: req.params.article_id}, {$pull: {note: req.params.note_id}}, { new: true})
-  .then(function(dbArticle) {
-      res.json(dbArticle);
-  })
-  .catch(function(err) {
-      res.json(err);
-  });
+    db.Article.findOneAndUpdate({_id: req.params.article_id}, {$pull: {note: req.params.note_id}}, { new: true})
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
 
 
 })
 
 // Deletes a note directly
 app.post("/notes/delete/:note_id", function(req, res) {
-  db.Note.findByIdAndRemove({_id: req.params.note_id})
-  .then(function(dbNote) {
-    res.json(dbNote);
-  })
-  .catch(function(err) {
-    res.json(err)
-  })
+    db.Note.findByIdAndRemove({_id: req.params.note_id})
+    .then(function(dbNote) {
+      res.json(dbNote);
+    })
+    .catch(function(err) {
+      res.json(err)
+    })
 })
 
 // Delete an article from the list of articles
 app.post("/article/delete/:article_id", function(req, res) {
-  db.Article.findByIdAndRemove({_id: req.params.article_id})
-  .then(function(dbNote) {
-    res.json(dbNote);
-  })
-  .catch(function(err) {
-    res.json(err)
-  })
+    db.Article.findByIdAndRemove({_id: req.params.article_id})
+    .then(function(dbNote) {
+      res.json(dbNote);
+    })
+    .catch(function(err) {
+      res.json(err)
+    })
 })
 
 // Clears all the articles in the db. Predominantly for testing purposes
 app.post("/articles/delete/all", function(req, res) {
-db.Article.remove({})
-.then(function(data) {
-  res.json(data);
-})
-.catch(function(err) {
-  res.json(err)
-})
+  db.Article.remove({})
+  .then(function(data) {
+    res.json(data);
+  })
+  .catch(function(err) {
+    res.json(err)
+  })
 })
 
 

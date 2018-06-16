@@ -1,17 +1,19 @@
+/*
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-/*
+
    $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
     + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
-    */
+    
   }
 });
+*/
 
-
+//SCRAPE ARTICLES
 $(document).on("click", "#scrapeNew", function() {
   $.ajax({
     method: "GET",
@@ -23,46 +25,7 @@ $(document).on("click", "#scrapeNew", function() {
   })
 });
 
-/*
-function getScrape() {
 
-  
-  $.get("/scrape", function(data) {
-  // For each one
-
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
-    + data[i].title + '<a href="#" id="saveBtn" class="btn btn-danger">Save Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
-
-    /*
-    $('#articles').append(
-      <div class="card">
-      <h5 class="card-header">Featured</h5>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-
-    
-  }
-
-  
-  location.reload();
-});
-};
-
-
-$("#scrapeNew").click(function (event) {
-
-  $("#articles").empty();
-  getScrape();
-  //$('.modal').modal();
-});
-
-*/
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
