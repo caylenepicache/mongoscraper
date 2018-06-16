@@ -21,7 +21,7 @@
   <li class="nav-item">
     <a class="nav-link" href="/articles">Saved Articles</a>
   </li>
-    <button class="btn btn-danger" id="scrapeNew" >Scrape New Articles!</button>
+    <button class="btn btn-danger" id="scrapeNew">Scrape New Articles!</button>
   </li>
 </ul>
 <div class="jumbotron jumbotron-fluid">
@@ -30,6 +30,25 @@
     <p class="lead">scrape away</p>
   </div>
 </div>
+
+<!-- MODAL -->
+      
+    <div class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Your Friend Match!</h5>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-title" id="userMatchName"></h5>
+                <img id="userMatchImg" src="" width="350" height="200" alt="No Image">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
 
 <body>
 	{{{ body }}}

@@ -8,8 +8,7 @@ body { background-color: #F2F6D0 }
 #articles {
   display: inline-block;
   overflow: auto;
-  width: 60%;
-  height: 700px;
+  width: 100%;
 }
 #notes {
   float: right;
@@ -27,4 +26,13 @@ input {
 textarea {
   height: 200px;
   font-size: 18px;
+}
+
+#notesBtn, #deleteBtn {
+  float: right;
+}
+
+#artTitle {
+  word-wrap: break-word !important;
+  float: left;
 }
