@@ -5,8 +5,8 @@ $.getJSON("/articles", function(data) {
     // Display the apropos information on the page
    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
 
-   $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 id="artTitle" class="card-header">' 
-   + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
+   $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
+    + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
   }
 });
 
@@ -18,7 +18,7 @@ function getScrape() {
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
-    + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
+    + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
 
     /*
     $('#articles').append(
