@@ -3,13 +3,13 @@
     {{#each articles}}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>{{title}}</h4>
+            <h4>{{this.title}}</h4>
         </div>
         <div class="panel-body">
-            <p> {{syn}}</p>
-            <a href={{link}} target="_blank">{{link}}</a>
+            <p> {{this.syn}}</p>
+            <a href={{this.link}} target="_blank">{{link}}</a>
             <br><br>
-            <button type="button" class="btn btn-success save" data-id={{_id}}>Save Article</button>
+            <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
         </div>
     </div>
     {{/each}}

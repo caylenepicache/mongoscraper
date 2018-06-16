@@ -100,106 +100,66 @@ app.get("/", function(req, res) {
     });
 });
 
-/*
-// Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
-  // Grab every document in the Articles collection
-  db.Article.find({})
-    .then(function(dbArticle) {
-      // If we were able to successfully find Articles, send them back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
+app.get("/saved", function(req, res) {
+  db.Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
+    var hbsObject = {
+      article: articles
+    };
+    res.render("saved", hbsObject);
+  });
 });
-*/
-// Route for grabbing a specific Article by id, populate it with it's note
+
+// This will get the articles we scraped from the mongoDB
+app.get("/articles", function(req, res) {
+  // Grab every doc in the Articles array
+  db.Article.find({}, function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
+});
+
+// Grab an article by it's ObjectId
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  db.Article.findOne({ _id: req.params.id })
-    // ..and populate all of the notes associated with it
-    .populate("note")
-    .then(function(dbArticle) {
-      // If we were able to successfully find an Article with the given id, send it back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
+  db.Article.findOne({ "_id": req.params.id })
+  // ..and populate all of the notes associated with it
+  .populate("note")
+  // now, execute our query
+  .exec(function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Otherwise, send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
 });
 
 
-// Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function(req, res) {
-  // Create a new note and pass the req.body to the entry
-  db.Note.create(req.body)
-    .then(function(dbNote) {
-      // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
-      // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
-      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
-    })
-    .then(function(dbArticle) {
-      // If we were able to successfully update an Article, send it back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
+// Save an article
+app.post("/articles/save/:id", function(req, res) {
+    // Use the article id to find and update its saved boolean
+  db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+    // Execute the above query
+    .exec(function(err, doc) {
+      // Log any errors
+      if (err) {
+        console.log(err);
+      }
+      else {
+        // Or send the document to the browser
+        res.send(doc);
+      }
     });
 });
-
-
-
-
-// Deletes a note from the notes array stored in the article
-app.put("/delete/:article_id/:note_id", function(req, res) {
-    db.Article.findOneAndUpdate({_id: req.params.article_id}, {$pull: {note: req.params.note_id}}, { new: true})
-    .then(function(dbArticle) {
-        res.json(dbArticle);
-    })
-    .catch(function(err) {
-        res.json(err);
-    });
-
-
-})
-
-// Deletes a note directly
-app.post("/notes/delete/:note_id", function(req, res) {
-    db.Note.findByIdAndRemove({_id: req.params.note_id})
-    .then(function(dbNote) {
-      res.json(dbNote);
-    })
-    .catch(function(err) {
-      res.json(err)
-    })
-})
-
-// Delete an article from the list of articles
-app.post("/article/delete/:article_id", function(req, res) {
-    db.Article.findByIdAndRemove({_id: req.params.article_id})
-    .then(function(dbNote) {
-      res.json(dbNote);
-    })
-    .catch(function(err) {
-      res.json(err)
-    })
-})
-
-// Clears all the articles in the db. Predominantly for testing purposes
-app.post("/articles/delete/all", function(req, res) {
-  db.Article.remove({})
-  .then(function(data) {
-    res.json(data);
-  })
-  .catch(function(err) {
-    res.json(err)
-  })
-})
 
 
 
