@@ -9,7 +9,7 @@ var NoteSchema = new Schema({
   body: {
     type: String
 },
-article: {
+  article: {
     type: Schema.Types.ObjectId,
     ref: "Article"
 }

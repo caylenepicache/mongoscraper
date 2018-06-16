@@ -8,8 +8,12 @@
                 <h4 class="modal-title">Notes for {{this.title}}</h4>
             </div>
             <div class="modal-body">
-                {{#if this.notes}}
-                    {{#each this.notes}}
+                <h3>note?????{{title}}
+                {{#each note}}
+                {{this._id}}
+                {{/each}}</h3>
+                {{#if note}}
+                    {{#each this}}
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <p class="previousNotes"> {{this.body}}</p>
@@ -20,7 +24,7 @@
                 {{else}}
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <h4>No notes for this article yet.</h4>
+                            <h4>No notes for this article</h4>
                         </div>
                     </div>
                 {{/if}}

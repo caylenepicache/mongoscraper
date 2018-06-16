@@ -45,14 +45,15 @@ $(".saveNote").on("click", function() {
       method: "POST",
       url: "/notes/save/" + thisId,
       data: {
-        text: $("#noteText" + thisId).val()
+        body: $("#noteText" + thisId).val()
       }
     }).done(function(data) {
         // Log the response
-        console.log(data);
+        console.log("datatxt" + data);
+        console.log("thisid" + thisId);
         // Empty the notes section
         $("#noteText" + thisId).val("");
-        $(".modal").modal("hide");
+        $(".modalNote").modal("hide");
         window.location = "/saved"
     });
   }

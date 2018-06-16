@@ -45,8 +45,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static("public"));
 app.use('/public', express.static(__dirname + "/public"));
 
-// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// If deployed, use the deployed database. Otherwise use the local myapp database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/myapp";
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
@@ -118,7 +118,7 @@ app.get("/saved", function(req, res) {
   });
 });
 
-// This will get the articles we scraped from the mongoDB
+
 app.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
   db.Article.find({}, function(error, doc) {
@@ -133,7 +133,7 @@ app.get("/articles", function(req, res) {
   });
 });
 
-// Grab an article by it's ObjectId
+
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ "_id": req.params.id })
@@ -152,7 +152,7 @@ app.get("/articles/:id", function(req, res) {
   });
 });
 
-// Save an article
+
 app.post("/articles/save/:id", function(req, res) {
     // Use the article id to find and update its saved boolean
   db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
@@ -170,7 +170,7 @@ app.post("/articles/save/:id", function(req, res) {
 });
 
 
-// Delete an article
+
 app.post("/articles/delete/:id", function(req, res) {
   // Use the article id to find and update its saved boolean
   db.Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false, "notes": []})
@@ -190,10 +190,16 @@ app.post("/articles/delete/:id", function(req, res) {
 
 // Create a new note
 app.post("/notes/save/:id", function(req, res) {
-  
+  console.log("reqparamsid" + req.params.id)
+  console.log("reqbody" + JSON.stringify(req.body));
+  console.log("reqbodyid" + JSON.stringify(req._id));
   db.Note.create(req.body)
     .then(function(noteDB){
-      return db.Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": noteDB } })
+      console.log("reqbody" + req.body);
+      console.log("thebody" + noteDB.body);
+      console.log(noteDB._id);
+      console.log("params in then" + req.params.id);
+      return db.Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "note": noteDB._id } },  { new: true })
 
     })
       .then(function(artDB) {
