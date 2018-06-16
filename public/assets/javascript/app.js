@@ -6,6 +6,7 @@ $(document).on("click", "#scrapeNew", function() {
     url: "/scrape" 
   })
   .then(function(data) {
+    $(".container").empty();
     console.log("New articles scraped");
     location.reload();
   })

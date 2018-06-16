@@ -37,6 +37,29 @@ textarea {
   float: left;
 }
 
-#savedTitle {
+#savedTitle, #scrapeTitle {
   text-align: center;
+}
+
+.jumbotron {
+  background-image: url("../images/steve-roe-674991-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  background-size: 100%;
+  color:white;
+  font-weight: bold;
+  padding: 0px;
+  text-shadow: black 5px 5px;
+
+}
+
+.nav {
+  background-color: black;
+  color: white;
+}
+
+.panel {
+  margin: 10px;
+  margin-bottom: 30px;
 }

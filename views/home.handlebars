@@ -1,14 +1,14 @@
 <div class="container">
+    <h1 id="scrapeTitle">Scraped Articles</h1>
 {{#if articles}}
     {{#each articles}}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>{{this.title}}</h4>
+            <h4><a href={{this.link}} target="_blank">{{this.title}}</a></h4>
         </div>
         <div class="panel-body">
             <p> {{this.syn}}</p>
-            <a href={{this.link}} target="_blank">{{link}}</a>
-            <br><br>
+            <!--<a href={{this.link}} target="_blank">{{link}}</a> -->
             <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
         </div>
     </div>
@@ -17,7 +17,7 @@
 {{else}}
 <div class="panel panel-default">
     <div class="panel-body">
-    <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+    <h4>Try clicking the scrape new articles button!</h4>
     </div>
     </div>
 {{/if}}
