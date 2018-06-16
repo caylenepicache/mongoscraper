@@ -16,18 +16,5 @@ router.get('/saved', function(req, res) {
 
 
 
-/*
-
-router.get('/portfolio', function(req, res) {
-  res.render('portfolio')
-})
-
-router.get('/contactme', function(req, res) {
-  res.render('contactme')
-})
-*/
-
-
-
 // Export routes for server.js to use.
 module.exports = router;

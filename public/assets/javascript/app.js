@@ -1,17 +1,3 @@
-/*
-// Grab the articles as a json
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-   // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-
-   $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
-    + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
-    
-  }
-});
-*/
 
 //SCRAPE ARTICLES
 $(document).on("click", "#scrapeNew", function() {
@@ -26,7 +12,7 @@ $(document).on("click", "#scrapeNew", function() {
 });
 
 
-//SAVE
+//SAVE AN ARTICLE
 $(".save").on("click", function() {
   var thisId = $(this).attr("data-id");
   $.ajax({
@@ -37,7 +23,39 @@ $(".save").on("click", function() {
   })
 });
 
+//DELETE AN ARTICLE
+$(".delete").on("click", function() {
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+      method: "POST",
+      url: "/articles/delete/" + thisId
+  }).done(function(data) {
+      window.location = "/saved"
+  })
+});
 
+//Handle Save Note button
+$(".saveNote").on("click", function() {
+  var thisId = $(this).attr("data-id");
+  if (!$("#noteText" + thisId).val()) {
+      alert("please enter a note to save")
+  }else {
+    $.ajax({
+      method: "POST",
+      url: "/notes/save/" + thisId,
+      data: {
+        text: $("#noteText" + thisId).val()
+      }
+    }).done(function(data) {
+        // Log the response
+        console.log(data);
+        // Empty the notes section
+        $("#noteText" + thisId).val("");
+        $(".modal").modal("hide");
+        window.location = "/saved"
+    });
+  }
+});
 
 
 // Whenever someone clicks a p tag
