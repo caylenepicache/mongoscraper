@@ -28,7 +28,7 @@ textarea {
   font-size: 18px;
 }
 
-#notesBtn, #deleteBtn {
+#notesBtn, #deleteBtn, #saveBtn {
   float: right;
 }
 

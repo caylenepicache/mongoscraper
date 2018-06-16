@@ -4,21 +4,36 @@ $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-
+/*
    $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
     + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
+    */
   }
 });
 
 
+$(document).on("click", "#scrapeNew", function() {
+  $.ajax({
+    method: "GET",
+    url: "/scrape" 
+  })
+  .then(function(data) {
+    console.log("New articles scraped");
+    location.reload();
+  })
+});
+
+/*
 function getScrape() {
+
+  
   $.get("/scrape", function(data) {
   // For each one
 
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     $("#articles").append("<p data-id='" + data[i]._id + "'>" + '<div class="card"><h5 class="card-header">' 
-    + data[i].title + '<a href="#" id="notesBtn" class="btn btn-danger">Article Notes</a><a href="#" id="deleteBtn" class="btn btn-primary">Delete Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
+    + data[i].title + '<a href="#" id="saveBtn" class="btn btn-danger">Save Article</a> </h5><p class="card-text">'+ data[i].syn + '</p><div class="card-body"><h5 class="card-title">' +  data[i].link + '</h5></div></div>');
 
     /*
     $('#articles').append(
@@ -31,7 +46,7 @@ function getScrape() {
       </div>
     </div>
 
-    */
+    
   }
 
   
@@ -47,7 +62,7 @@ $("#scrapeNew").click(function (event) {
   //$('.modal').modal();
 });
 
-
+*/
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
