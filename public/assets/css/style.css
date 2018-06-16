@@ -36,3 +36,7 @@ textarea {
   word-wrap: break-word !important;
   float: left;
 }
+
+#savedTitle {
+  text-align: center;
+}

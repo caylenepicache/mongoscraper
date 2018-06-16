@@ -183,6 +183,49 @@ app.post("/articles/delete/:id", function(req, res) {
 });
 
 
+// Create a new note
+app.post("/notes/save/:id", function(req, res) {
+  
+  db.Note.create(req.body)
+    .then(function(noteDB){
+      return db.Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "notes": noteDB } })
+
+    })
+      .then(function(artDB) {
+        res.json(artDB);
+      })
+      .catch(function(err){
+        res.json(err);
+      })
+    }
+  );
+
+// Delete a note
+app.delete("/notes/delete/:note_id/:article_id", function(req, res) {
+  // Use the note id to find and delete it
+  db.Note.findOneAndRemove({ "_id": req.params.note_id }, function(err) {
+    // Log any errors
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    else {
+      Article.findOneAndUpdate({ "_id": req.params.article_id }, {$pull: {"notes": req.params.note_id}})
+       // Execute the above query
+        .exec(function(err) {
+          // Log any errors
+          if (err) {
+            console.log(err);
+            res.send(err);
+          }
+          else {
+            // Or send the note to the browser
+            res.send("Note Deleted");
+          }
+        });
+    }
+  });
+});
 
 
 
