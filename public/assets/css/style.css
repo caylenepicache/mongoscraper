@@ -100,10 +100,24 @@ textarea {
   float: left;
 }
 
-#savedTitle, #scrapeTitle, #subTitle {
+#savedTitle, #scrapeTitle {
   text-align: center;
   color: white;
   font-family: 'Krona One', sans-serif;
+}
+
+#subTitle {
+  text-align: center;
+  color: white;
+  font-family: 'Krona One', sans-serif;
+}
+
+.display-4 {
+  color: gold;
+  font-size: 68px !important;
+}
+.lead {
+  font-size: 30px !important;
 }
 
 .jumbotron {

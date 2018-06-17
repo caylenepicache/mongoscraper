@@ -57,7 +57,7 @@ mongoose.connect(MONGODB_URI);
 
 //SCRAPING HERE
 
-// A GET route for scraping the echoJS website
+
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
   axios.get("https://kotaku.com/").then(function(response) {
@@ -191,6 +191,7 @@ app.post("/articles/delete/:id", function(req, res) {
 
 
 // Create a new note
+//NEED TO FIX THE NOTE FUNCTIONALITY TO SAVE TO HANDLEBARS
 app.post("/notes/save/:id", function(req, res) {
   console.log("reqparamsid" + req.params.id)
   console.log("reqbody" + JSON.stringify(req.body));
