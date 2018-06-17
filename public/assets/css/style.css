@@ -1,4 +1,67 @@
-body { background-color: #F2F6D0 }
+body{
+  background-color: #000 !important;
+}
+
+#bottomPart { 
+  background-color:black;
+  height: 100%;
+  margin: 0 auto;
+}
+a.nav-link {
+  color:deepskyblue !important;
+  font-family: 'Tajawal', sans-serif;
+}
+
+a {
+  color: deeppink !important;
+  font-family: 'Tajawal', sans-serif;
+}
+a:hover {
+  text-decoration: overline !important;
+}
+p {
+  color: white;
+  font-family: 'Tajawal', sans-serif;
+}
+
+h4 {
+  color: deepskyblue !important;
+  font-family: 'Krona One', sans-serif;
+}
+
+
+.btn-primary {
+  color: #000 !important;
+  background-color: deepskyblue !important;
+  border-color: deepskyblue !important;
+  font-family: 'Tajawal', sans-serif;
+}
+.btn-primary:hover {
+  color: #000 !important;
+  background-color: deepskyblue !important;
+  border-color: deepskyblue !important;
+  opacity: 0.75;
+}
+
+#saveartBtn {
+  color: #000 !important;
+  background-color: mediumspringgreen !important;
+  border-color: mediumspringgreen !important;
+  float: right;
+  font-family: 'Tajawal', sans-serif;
+}
+
+#saveartBtn:hover {
+  color: #000 !important;
+  background-color: mediumspringgreen !important;
+  border-color: mediumspringgreen !important;
+  float: right;
+  opacity: 0.75;
+}
+
+.nav {
+  padding: 5px;
+}
 #wrapper {
   width: 960px;
   margin-left: auto;
@@ -37,8 +100,10 @@ textarea {
   float: left;
 }
 
-#savedTitle, #scrapeTitle {
+#savedTitle, #scrapeTitle, #subTitle {
   text-align: center;
+  color: white;
+  font-family: 'Krona One', sans-serif;
 }
 
 .jumbotron {
@@ -50,7 +115,9 @@ textarea {
   color:white;
   font-weight: bold;
   padding: 0px;
-  text-shadow: black 5px 5px;
+  text-shadow: black 8px 8px;
+  margin-bottom: 0px !important;
+  font-family: 'Krona One', sans-serif;
 
 }
 
@@ -60,6 +127,6 @@ textarea {
 }
 
 .panel {
-  margin: 10px;
-  margin-bottom: 30px;
+  margin: 0px;
+  margin-bottom: 66px;
 }

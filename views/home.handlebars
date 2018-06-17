@@ -1,15 +1,18 @@
+<div id="bottomPart">
 <div class="container">
+    <p>
     <h1 id="scrapeTitle">Scraped Articles</h1>
 {{#if articles}}
     {{#each articles}}
-    <div class="panel panel-default">
+    <div id="eachPanel" class="panel panel-default">
         <div class="panel-heading">
             <h4><a href={{this.link}} target="_blank">{{this.title}}</a></h4>
         </div>
         <div class="panel-body">
-            <p> {{this.syn}}</p>
-            <!--<a href={{this.link}} target="_blank">{{link}}</a> -->
-            <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+            <p> 
+                {{this.syn}}
+                <button type="button" id="saveartBtn" class="btn save" data-id={{this._id}}>Save Article</button>
+            </p>
         </div>
     </div>
     {{/each}}
@@ -17,8 +20,9 @@
 {{else}}
 <div class="panel panel-default">
     <div class="panel-body">
-    <h4>Try clicking the scrape new articles button!</h4>
+    <h4 id="subTitle">Try clicking the scrape new articles button!</h4>
     </div>
     </div>
 {{/if}}
+</div>
 </div>

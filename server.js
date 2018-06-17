@@ -109,26 +109,13 @@ app.get("/", function(req, res) {
     });
 });
 
-// Route for retrieving all Notes from the db
-app.get("/notes", function(req, res) {
-  // Find all Notes
-  db.Note.find({})
-    .then(function(dbNote) {
-      // If all Notes are successfully found, send them back to the client
-      res.json(dbNote);
-    })
-    .catch(function(err) {
-      // If an error occurs, send the error back to the client
-      res.json(err);
-    });
-});
 
 app.get("/saved", function(req, res) {
   db.Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
     var hbsObject = {
-      article: articles,
+      article: articles
     };
-    console.log("hbsobject" + hbsObject);
+    console.log("hbsobject" + JSON.stringify(hbsObject));
     res.render("saved", hbsObject);
   });
 });
@@ -210,7 +197,7 @@ app.post("/notes/save/:id", function(req, res) {
   console.log("reqbodyid" + JSON.stringify(req._id));
   db.Note.create(req.body)
     .then(function(noteDB){
-      console.log("reqbody" + req.body);
+      console.log("reqbody" + JSON.stringify(req.body));
       console.log("thebody" + noteDB.body);
       console.log(noteDB._id);
       console.log("params in then" + req.params.id);
@@ -226,33 +213,6 @@ app.post("/notes/save/:id", function(req, res) {
     }
   );
 
-  
-// Delete a note
-app.delete("/notes/delete/:note_id/:article_id", function(req, res) {
-  // Use the note id to find and delete it
-  db.Note.findOneAndRemove({ "_id": req.params.note_id }, function(err) {
-    // Log any errors
-    if (err) {
-      console.log(err);
-      res.send(err);
-    }
-    else {
-      Article.findOneAndUpdate({ "_id": req.params.article_id }, {$pull: {"notes": req.params.note_id}})
-       // Execute the above query
-        .exec(function(err) {
-          // Log any errors
-          if (err) {
-            console.log(err);
-            res.send(err);
-          }
-          else {
-            // Or send the note to the browser
-            res.send("Note Deleted");
-          }
-        });
-    }
-  });
-});
 
 
 

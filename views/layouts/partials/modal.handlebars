@@ -9,10 +9,10 @@
             </div>
             <div class="modal-body">
                 {{#if this.notes}}
-                    {{#each this.notes}}
+                    {{#each notes}}
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <p class="previousNotes"> {{this.body}}</p>
+                                <p class="previousNotes"> {{notes.body}}</p>
                                 <button type="button" class="btn btn-danger deleteNote" data-note-id={{this._id}} data-article-id={{this.article}}>X</button>
                             </div>
                         </div>
