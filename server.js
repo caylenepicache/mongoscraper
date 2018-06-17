@@ -109,11 +109,26 @@ app.get("/", function(req, res) {
     });
 });
 
+// Route for retrieving all Notes from the db
+app.get("/notes", function(req, res) {
+  // Find all Notes
+  db.Note.find({})
+    .then(function(dbNote) {
+      // If all Notes are successfully found, send them back to the client
+      res.json(dbNote);
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error back to the client
+      res.json(err);
+    });
+});
+
 app.get("/saved", function(req, res) {
   db.Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
     var hbsObject = {
-      article: articles
+      article: articles,
     };
+    console.log("hbsobject" + hbsObject);
     res.render("saved", hbsObject);
   });
 });
@@ -138,7 +153,7 @@ app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ "_id": req.params.id })
   // ..and populate all of the notes associated with it
-  .populate("note")
+  .populate("notes")
   // now, execute our query
   .exec(function(error, doc) {
     // Log any errors
@@ -211,6 +226,7 @@ app.post("/notes/save/:id", function(req, res) {
     }
   );
 
+  
 // Delete a note
 app.delete("/notes/delete/:note_id/:article_id", function(req, res) {
   // Use the note id to find and delete it

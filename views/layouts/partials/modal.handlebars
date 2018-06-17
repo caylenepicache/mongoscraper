@@ -8,12 +8,8 @@
                 <h4 class="modal-title">Notes for {{this.title}}</h4>
             </div>
             <div class="modal-body">
-                <h3>note?????{{title}}
-                {{#each note}}
-                {{this._id}}
-                {{/each}}</h3>
-                {{#if note}}
-                    {{#each this}}
+                {{#if this.notes}}
+                    {{#each this.notes}}
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <p class="previousNotes"> {{this.body}}</p>
